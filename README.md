@@ -44,7 +44,7 @@
 </br>
 
 <p>린캔버스</p>
-https://github.com/user-attachments/files/16759559/default.pptx
+<img src="https://github.com/user-attachments/files/16759559/default.pptx">
 
 <p>노션</p>
 https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4
