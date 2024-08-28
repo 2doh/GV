@@ -47,3 +47,17 @@
 <img src="https://github.com/2doh/GV/issues/1#issue-2490673666">
 <p>노션</p>
 https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4
+
+<div align="flex-start">
+<h4 align="flex-start">📈 언어 사용량 통계</h4>
+  <!-- Top Languages Card -->
+  <a href="https://github.com/2doh/github-readme-stats">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=2doh&layout=compact" />
+  </a>
+
+<div align="flex-start">
+<h4 align="flex-start">📈 GitHub 통계</h4>
+  <a href="https://github.com/2doh/github-readme-stats" >
+    <img src="https://github-readme-stats.vercel.app/api?username=2doh&show_icons=true&theme=white" />
+  </a>
+</div>
