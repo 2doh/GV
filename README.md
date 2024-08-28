@@ -34,7 +34,7 @@
         <img src="https://img.shields.io/badge/Github-181717?style=for-the-badge&logo=Github&logoColor=white">
         <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
         <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white">
-        <img src="https://img.shields.io/badge/StyledComponents-DB7093?style=for-the-badge&logo=StyledComponents&logoColor=white">
+        <br/><img src="https://img.shields.io/badge/StyledComponents-DB7093?style=for-the-badge&logo=StyledComponents&logoColor=white">
         <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
         <img src="https://img.shields.io/badge/reacthookform-EC5990?style=for-the-badge&logo=reacthookform&logoColor=white">
         
@@ -42,7 +42,9 @@
 
 <h4>📌 사전 기획</h4>
 </br>
-<p>린캔버스</p>
 
+<p>린캔버스</p>
+<img src="https://github.com/2doh/GV/issues/1#issue-2490673666">
 <p>노션</p>
 https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4
+
