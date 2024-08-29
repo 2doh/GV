@@ -28,7 +28,6 @@ const BoardHeaderInnerStyle = styled.div`
   align-items: center;
   /* background-color: blue; */
   padding: 20px;
-  cursor: pointer;
 `;
 
 export interface menuItem {
