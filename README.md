@@ -46,3 +46,6 @@
 
 <p>노션</p>
 https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4
+
+<p>피그마</p>
+https://www.figma.com/design/a1zOinzJF9v6Z1Zwj2FBpX/GV?node-id=2-389&t=4jWCb2JrjAcvTXdb-1

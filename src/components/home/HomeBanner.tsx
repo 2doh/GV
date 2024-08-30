@@ -42,16 +42,7 @@ const SpanStyle = styled.span`
   }
 `;
 
-const HomeBanner = () => {
-  const handleBtClick = () => {
-    if (children === "참여하기") {
-      alert("dd");
-    }
-    if (children === "요금제 및 가격") {
-      alert("준비중입니다");
-    }
-  };
-
+const HomeBanner = (): JSX.Element => {
   return (
     <BannerWrap>
       <BannerInnerStyle>
@@ -60,8 +51,8 @@ const HomeBanner = () => {
           여러분의 무한한 가능성을 지원합니다
         </SpanStyle>
         <BannerBtnWrap>
-          <HomeBtn handleBtClick={handleBtClick}>참여하기</HomeBtn>
-          <HomeBtn handleBtClick={handleBtClick}>요금제 및 가격</HomeBtn>
+          <HomeBtn>참여하기</HomeBtn>
+          <HomeBtn>요금제 및 가격</HomeBtn>
         </BannerBtnWrap>
       </BannerInnerStyle>
     </BannerWrap>

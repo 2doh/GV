@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 
 interface HomeProps {
-  children?: React.ReactNode;
-  handleBtClick?: void;
+  children: string;
 }
 
 const HomeBtnStyle = styled.div`
@@ -31,7 +30,16 @@ const HomeBtnStyle = styled.div`
   }
 `;
 
-const HomeBtn = ({ children, handleBtClick }: HomeProps): JSX.Element => {
+const HomeBtn = ({ children }: HomeProps): JSX.Element => {
+  const handleBtClick = (children: string) => {
+    if (children === "참여하기") {
+      alert("dd");
+    }
+    if (children === "요금제 및 가격") {
+      alert("준비중입니다");
+    }
+  };
+
   return (
     <HomeBtnStyle
       className="br10"
