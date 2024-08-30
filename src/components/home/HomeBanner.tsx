@@ -7,6 +7,9 @@ const BannerWrap = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  @media (max-width: 540px) {
+    height: 100vw;
+  }
 `;
 
 const BannerInnerStyle = styled.div`
@@ -38,6 +41,9 @@ const SpanStyle = styled.span`
     height: 15.73vw;
   }
   @media (max-width: 540px) {
+    font-size: 20px;
+  }
+  @media (max-width: 350px) {
     font-size: 15px;
   }
 `;

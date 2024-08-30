@@ -6,6 +6,7 @@ import Test from "Test";
 import Board from "pages/board/Board";
 import Home from "pages/home/Home";
 import Header from "components/layout/Header";
+import Signin from "pages/user/Signin";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/board" element={<Board />}></Route>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/signin" element={<Signin />}></Route>
       </Routes>
     </BrowserRouter>
   );

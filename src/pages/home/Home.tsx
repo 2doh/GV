@@ -6,7 +6,6 @@ import HomeBanner from "components/home/HomeBanner";
 const HomeStyle = styled.div`
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   background: url(${background}) no-repeat center;
   background-size: cover;
 `;
