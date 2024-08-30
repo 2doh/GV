@@ -25,7 +25,9 @@ const HeaderMenuWrap = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
+  gap: 5%;
   svg {
+    max-width: 100px;
     & path {
       color: #fff;
     }
@@ -33,7 +35,7 @@ const HeaderMenuWrap = styled.div`
 `;
 
 const HbrMenuStyle = styled.div`
-  width: 100%;
+  width: 80px;
   height: 80px;
   cursor: pointer;
   @media (max-width: 540px) {
@@ -54,7 +56,6 @@ const Header = () => {
       }
     };
     window.addEventListener("resize", handleResize);
-    return window.removeEventListener("resize", handleResize);
   }, []);
   return (
     <HeaderStyle>
