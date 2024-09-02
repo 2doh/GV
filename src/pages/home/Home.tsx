@@ -16,7 +16,7 @@ const HomeBannerWrap = styled.div`
   background-color: rgba(0, 0, 0, 0.45);
 `;
 
-const Home = () => {
+const Home = (): JSX.Element => {
   return (
     <HomeStyle>
       <HomeBannerWrap>

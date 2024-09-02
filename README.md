@@ -1,5 +1,5 @@
 <div align="center" width="500">
-  <img src="./src/images/logo.png" width="500" height="200">
+  <img src="" width="500" height="200">
   <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;">GatherVerse</h2>
 
 **GV : GatherVerse**
@@ -42,10 +42,22 @@
 
 <h4>📌 사전 기획</h4>
 </br>
-<p>린캔버스</p>
+[린캔버스]()
 
-<p>노션</p>
-https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4
+[노션](https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4)
 
-<p>피그마</p>
-https://www.figma.com/design/a1zOinzJF9v6Z1Zwj2FBpX/GV?node-id=2-389&t=4jWCb2JrjAcvTXdb-1
+[피그마](https://www.figma.com/design/a1zOinzJF9v6Z1Zwj2FBpX/GV?node-id=2-389&t=4jWCb2JrjAcvTXdb-1)
+
+<div align="flex-start">
+<h4 align="flex-start">📈 언어 사용량 통계</h4>
+  <!-- Top Languages Card -->
+  <a href="https://github.com/2doh/github-readme-stats">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=2doh&layout=compact" />
+  </a>
+
+<div align="flex-start">
+<h4 align="flex-start">📈 GitHub 통계</h4>
+  <a href="https://github.com/2doh/github-readme-stats" >
+    <img src="https://github-readme-stats.vercel.app/api?username=2doh&show_icons=true&theme=white" />
+  </a>
+</div>

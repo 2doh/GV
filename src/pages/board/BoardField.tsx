@@ -7,7 +7,7 @@ const FieldStyle = styled.div`
   height: 100%;
 `;
 
-const BoardField = () => {
+const BoardField = (): JSX.Element => {
   return (
     <FieldStyle>
       <Test></Test>

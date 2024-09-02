@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
-import MenuItem from "antd/es/menu/MenuItem";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const IconWrapStyle = styled.div`
   width: 40px;
@@ -20,7 +19,7 @@ type BoardSelectMenuProps = {
   menuList: menuItem[];
 };
 
-const BoardSelectMenu: React.FC<BoardSelectMenuProps> = ({ menuList }) => {
+const BoardSelectMenu = ({ menuList }: BoardSelectMenuProps): JSX.Element => {
   const tempHandle = (index: number) => {
     console.log(index);
   };

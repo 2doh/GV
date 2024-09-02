@@ -44,7 +44,7 @@ const HbrMenuStyle = styled.div`
   }
 `;
 
-const Header = () => {
+const Header = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(true);
   useEffect(() => {
     const handleResize = () => {

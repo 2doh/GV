@@ -30,7 +30,7 @@ const BoardHeaderInnerStyle = styled.div`
   padding: 20px;
 `;
 
-export interface menuItem {
+interface menuItem {
   item?: ReactElement;
   state?: string;
 }
@@ -49,7 +49,7 @@ const menuList: menuItem[] = [
   { item: <FaImage />, state: "image" },
 ];
 
-const BoardHeader: React.FC = () => {
+const BoardHeader = (): JSX.Element => {
   return (
     <BoardHeaderWrap>
       <BoardHeaderInnerStyle>

@@ -8,7 +8,7 @@ const BoardWrap = styled.div`
   height: 100%;
 `;
 
-const Board = () => {
+const Board = (): JSX.Element => {
   return (
     <BoardWrap>
       <BoardHeader />
