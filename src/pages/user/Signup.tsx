@@ -103,7 +103,12 @@ const Signup = () => {
       });
       console.log(response);
     } catch (error) {
-      console.log(error);
+      // Firebase 인증 에러를 `setErrorMsg`를 통해 상태에 설정
+      if (error instanceof Error) {
+        setErrorMsg(error.message);
+      } else {
+        setErrorMsg("알 수 없는 오류가 발생했습니다.");
+      }
     }
   };
 
@@ -114,8 +119,8 @@ const Signup = () => {
         <AuthContainer propData={propData}>
           {/* <SignupTitleStyle>이메일</SignupTitleStyle> */}
           <AuthInput
-            register={register("userMail")}
             error={errors.userMail?.message}
+            register={register("userMail")}
           >
             이메일을 입력해 주세요
           </AuthInput>

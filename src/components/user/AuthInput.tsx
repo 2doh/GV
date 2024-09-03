@@ -3,6 +3,7 @@ import usePlaceholder from "hook/usePlaceholder";
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
+import AuthErrMsg from "./AuthErrMsg";
 
 const AuthInputStyle = styled.input`
   width: 100%;
@@ -36,6 +37,7 @@ const AuthInput = ({ children, register, error }: AuthData): JSX.Element => {
   return (
     <AuthInputWrap>
       <AuthInputStyle
+        {...register}
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
         placeholder={placeholder}
