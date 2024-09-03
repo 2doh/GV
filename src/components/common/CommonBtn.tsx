@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 
-const BtnStyle = styled.div`
+const BtnStyle = styled.button`
   width: 100%;
   height: 60px;
   padding: 5px;
@@ -12,14 +12,18 @@ const BtnStyle = styled.div`
   justify-content: center;
   color: #fff;
   font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  cursor: pointer;
 `;
 
-interface CommonBtn {
+interface CommonBtnProps {
   children: React.ReactNode;
 }
 
-const CommonBtn = ({ children }: CommonBtn): JSX.Element => {
-  return <BtnStyle className="br10">{children}</BtnStyle>;
+const CommonBtn = ({ children }: CommonBtnProps): JSX.Element => {
+  return <BtnStyle type="submit">{children}</BtnStyle>;
 };
 
 export default CommonBtn;

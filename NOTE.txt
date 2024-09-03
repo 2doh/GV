@@ -3,6 +3,10 @@ CheckBox 컴포넌트 사용시 필요 props : title / msg
 CommontBtn 반드시 children 위치에 버튼이름 적어주어야 함
 ex) <CommontBtn>로그인</CommontBtn>
 
+AuthContainer propData = {title : , msg : } => CheckBox 컴포넌트에 사용됨
+
+
+
 커스텀 훅 정리
 usePlaceholder : input 태그 focus시 placeholder 제거
 

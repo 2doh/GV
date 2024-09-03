@@ -1,0 +1,31 @@
+@import "../mixin";
+
+.login-wrap-panel {
+  margin: 0 auto;
+  width: 290px;
+  height: 100%;
+  .login-wrap-panel-social {
+    margin: 30px auto;
+  }
+  .login-panel-social-title {
+    height: 18px;
+    font-size: 16px;
+  }
+  .login-panel-social-list {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .login-panel-social-naver {
+    @include social();
+    background: #22d61e;
+  }
+  .login-panel-social-kakao {
+    @include social();
+    background-color: #ffeb38;
+  }
+  .login-panel-social-google {
+    @include social();
+    background-color: black;
+  }
+}

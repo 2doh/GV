@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import usePlaceholder from "hook/usePlaceholder";
 import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 
 const AuthInputStyle = styled.input`
@@ -19,10 +20,13 @@ const AuthInputWrap = styled.div`
 
 interface AuthData {
   children: string;
+  register: any;
+  error?: string;
 }
 
-const AuthInput = ({ children }: AuthData): JSX.Element => {
-  const [inputValue, setInputValue] = useState("");
+const AuthInput = ({ children, register, error }: AuthData): JSX.Element => {
+  const [inputValue, setInputValue] = useState<string>("");
+  const [visiblePass, setVisiblePass] = useState<boolean>(false);
   const clearInput = () => {
     setInputValue("");
   };
@@ -37,14 +41,35 @@ const AuthInput = ({ children }: AuthData): JSX.Element => {
         placeholder={placeholder}
         onFocus={() => handleFocus()}
         onBlur={() => handleBlur()}
-        type={children === "비밀번호를 입력해 주세요" ? "password" : "text"}
+        type={
+          children.includes("비밀번호")
+            ? visiblePass
+              ? "text"
+              : "password"
+            : "text"
+        }
       ></AuthInputStyle>
-      {inputValue && (
-        <MdCancel
-          style={{ width: "25px", height: "25px" }}
-          onClick={() => clearInput()}
-        />
-      )}
+      <div style={{ gap: "10px", display: "flex" }}>
+        {children.includes("비밀번호") &&
+          inputValue &&
+          (!visiblePass ? (
+            <FaEyeSlash
+              style={{ width: "20px", height: "20px" }}
+              onClick={() => setVisiblePass(true)}
+            />
+          ) : (
+            <FaEye
+              style={{ width: "20px", height: "20px" }}
+              onClick={() => setVisiblePass(false)}
+            />
+          ))}
+        {inputValue && (
+          <MdCancel
+            style={{ width: "20px", height: "20px" }}
+            onClick={() => clearInput()}
+          />
+        )}
+      </div>
     </AuthInputWrap>
   );
 };

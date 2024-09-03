@@ -1,0 +1,13 @@
+@mixin flex-center() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@mixin social() {
+  width: 80px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  @include flex-center();
+  cursor: pointer;
+}

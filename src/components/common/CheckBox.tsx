@@ -28,14 +28,19 @@ const CheckBoxStyle = styled.input`
   }
 `;
 
-interface childrenprop {
-  title: string;
-  msg: string;
+interface CheckBoxProp {
+  title?: string;
+  msg?: string;
+  isChecked: boolean;
+  setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CheckBox = ({ title, msg }: childrenprop): JSX.Element => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-
+const CheckBox = ({
+  title,
+  msg,
+  setIsChecked,
+  isChecked,
+}: CheckBoxProp): JSX.Element => {
   return (
     <CheckBoxWrapStyle>
       <CheckFieldWrap>

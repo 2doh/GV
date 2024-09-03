@@ -5,10 +5,11 @@ import Logo from "components/common/Logo";
 import LogoBlack from "components/common/LogoBlack";
 import { useLocation } from "react-router";
 import CheckBox from "components/common/CheckBox";
+import AuthErrMsg from "./AuthErrMsg";
 
 const AuthWrap = styled.div`
   width: 100%;
-  /* height: 100vw; */
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,7 +33,7 @@ const AuthFieldWrap = styled.div`
 
 const AuthFieldInnerStyle = styled.div`
   width: 100%;
-  /* height: 100%; */
+  min-height: 100%;
   border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
@@ -41,33 +42,45 @@ const AuthFieldInnerStyle = styled.div`
 
 interface AuthContainerProp {
   children: React.ReactNode;
+  propData: {
+    title?: string;
+    msg?: string;
+    errorMsg: string | null;
+  };
 }
 
-const AuthContainer = ({ children }: AuthContainerProp): JSX.Element => {
+const AuthContainer = ({
+  children,
+  propData,
+}: AuthContainerProp): JSX.Element => {
   const location = useLocation();
   const [rememberId, setRememberId] = useState(false);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
   useEffect(() => {
-    if (location.pathname === "/signin") {
-      setRememberId(true);
-    } else {
-      setRememberId(false);
-    }
+    //   if (location.pathname === "/signin") {
+    //     setRememberId(true);
+    //   } else {
+    //     setRememberId(false);
+    //   }
+    // }, [location.pathname]);
+    const hiddenPaths = ["/signin", "/signup", "/findid"];
+    setRememberId(hiddenPaths.includes(location.pathname));
   }, [location.pathname]);
-
-  const loginObj = {
-    title: "아이디 저장",
-    msg: "개인정보 보호를 위해 개인 PC에서만 사용하세요.",
-  };
 
   return (
     <AuthWrap>
-      <LogoBlack />
       <AuthFieldWrap>
         <AuthFieldInnerStyle>{children}</AuthFieldInnerStyle>
+        <AuthErrMsg errorMsg={propData.errorMsg}></AuthErrMsg>
         {rememberId && (
-          <CheckBox title={loginObj.title} msg={loginObj.msg}></CheckBox>
+          <CheckBox
+            title={propData.title}
+            msg={propData.msg}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+          ></CheckBox>
         )}
-        <CommonBtn>로그인</CommonBtn>
+        {/* <CommonBtn>로그인</CommonBtn> */}
       </AuthFieldWrap>
     </AuthWrap>
   );

@@ -1,0 +1,50 @@
+.login-wrap-panel {
+  margin: 0 auto;
+  width: 290px;
+  height: 100%;
+}
+.login-wrap-panel .login-wrap-panel-social {
+  margin: 30px auto;
+}
+.login-wrap-panel .login-panel-social-title {
+  height: 18px;
+  font-size: 16px;
+}
+.login-wrap-panel .login-panel-social-list {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.login-wrap-panel .login-panel-social-naver {
+  width: 80px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #22d61e;
+}
+.login-wrap-panel .login-panel-social-kakao {
+  width: 80px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #ffeb38;
+}
+.login-wrap-panel .login-panel-social-google {
+  width: 80px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: black;
+}/*# sourceMappingURL=socialsignin.css.map */
