@@ -13,6 +13,9 @@ import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
+import { userSign } from "interface/userSignInterface";
+import { useNavigate } from "react-router";
+import { localSignin } from "api/userSign";
 
 const SigninWrapStyle = styled.div`
   margin: 200px auto 0;
@@ -22,6 +25,12 @@ const SigninWrapStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const SignupFormStyle = styled.form`
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
 `;
 
 const initSigninState = {
@@ -44,6 +53,7 @@ const signinSchema = yup.object().shape({
 });
 
 const Signin = (): JSX.Element => {
+  const navi = useNavigate();
   const {
     handleSubmit,
     register,
@@ -70,20 +80,35 @@ const Signin = (): JSX.Element => {
     },
   ];
 
+  const handleOnSubmit = async (data: userSign) => {
+    const result = await localSignin(data);
+    alert("로그인 되었습니다.");
+    console.log(result);
+    if (result?.operationType === "signIn") {
+      navi("/");
+    }
+  };
+
   return (
     <SigninWrapStyle>
       <LogoBlack />
-      <AuthContainer propData={propData}>
-        {tempArr.map((item, index) => (
-          <>
-            <AuthInput key={item.title} register={register} title={item.title}>
-              {item.msg}
-            </AuthInput>
-            {index < tempArr.length - 1 && <Divider />}
-          </>
-        ))}
-      </AuthContainer>
-      <CommonBtn>로그인</CommonBtn>
+      <SignupFormStyle onSubmit={handleSubmit(handleOnSubmit)}>
+        <AuthContainer propData={propData}>
+          {tempArr.map((item, index) => (
+            <>
+              <AuthInput
+                key={item.title}
+                register={register}
+                title={item.title}
+              >
+                {item.msg}
+              </AuthInput>
+              {index < tempArr.length - 1 && <Divider />}
+            </>
+          ))}
+        </AuthContainer>
+        <CommonBtn>로그인</CommonBtn>
+      </SignupFormStyle>
       <FindUserInfo></FindUserInfo>
       <SocialSignin></SocialSignin>
     </SigninWrapStyle>

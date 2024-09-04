@@ -55,7 +55,12 @@ const AuthInput = ({ children, register, title }: AuthData): JSX.Element => {
         //   register(title).onChange({ target: { value: formattedValue } });
         // }}
         onChange={e => {
-          setInputValue(e.target.value), register(title).onChange(e);
+          {
+            title.includes("userPhone")
+              ? (setInputValue(PhoneNumber(e)), register(title).onChange(e))
+              : setInputValue(e.target.value),
+              register(title).onChange(e);
+          }
         }}
         type={
           children.includes("비밀번호")

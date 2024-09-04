@@ -6,13 +6,12 @@ import AuthInput from "components/user/AuthInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "firebaseConfig";
 import React, { useState } from "react";
-import { doc, setDoc } from "firebase/firestore"; // Firestore를 사용하는 경우
-import { db } from "firebaseConfig"; // Firestore의 인스턴스 가져오기
 import CommonBtn from "components/common/CommonBtn";
 import AuthErrMsg from "components/user/AuthErrMsg";
+import { localSignup } from "api/userSign";
+import { userSign } from "interface/userSignInterface";
+import { useNavigate } from "react-router";
 
 const SigninWrapStyle = styled.div`
   margin: 200px auto 0;
@@ -64,7 +63,7 @@ const signupSchema = yup.object().shape({
 });
 
 const Signup = () => {
-  const [fbErrorMsg, setFbErrorMsg] = useState<string | null>("");
+  const navi = useNavigate();
 
   const propData = {
     title: "약관 동의",
@@ -81,34 +80,12 @@ const Signup = () => {
     mode: "onChange",
   });
 
-  const handleOnSubmit = async (data: {
-    userMail: string;
-    userPass: string;
-    userName: string;
-    userPhone: string;
-  }) => {
-    console.log(data);
-    console.log("gd");
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        data.userMail,
-        data.userPass,
-      );
-      await setDoc(doc(db, "users", response.user.uid), {
-        userMail: data.userMail,
-        userName: data.userName,
-        userPhone: data.userPhone,
-      });
-      console.log(response);
-    } catch (error) {
-      // Firebase 인증 에러를 `setErrorMsg`를 통해 상태에 설정
-      if (error instanceof Error) {
-        alert(error.message);
-        setFbErrorMsg("");
-      } else {
-        alert("알 수 없는 오류가 발생했습니다.");
-      }
+  const handleOnSubmit = async (data: userSign) => {
+    const result = await localSignup(data);
+    alert("회원가입 되었습니다.");
+    console.log(result);
+    if (result?.operationType === "signIn") {
+      navi("/signin");
     }
   };
 
@@ -150,7 +127,6 @@ const Signup = () => {
             </React.Fragment>
           ))}
         </AuthContainer>
-        <div>{fbErrorMsg}</div>
         {tempArr.map(item => (
           <AuthErrMsg
             errorMsg={(errors as any)[item.title]?.message}
