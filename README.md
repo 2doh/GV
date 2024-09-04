@@ -42,7 +42,7 @@
 
 <h4>📌 사전 기획</h4>
 </br>
-[린캔버스]()
+[린캔버스.pdf](https://github.com/user-attachments/files/16864992/default.pdf)
 
 [노션](https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4)
 
