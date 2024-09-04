@@ -45,7 +45,6 @@ interface AuthContainerProp {
   propData: {
     title?: string;
     msg?: string;
-    errorMsg: string | null;
   };
 }
 
@@ -71,7 +70,6 @@ const AuthContainer = ({
     <AuthWrap>
       <AuthFieldWrap>
         <AuthFieldInnerStyle>{children}</AuthFieldInnerStyle>
-        <AuthErrMsg errorMsg={propData.errorMsg}></AuthErrMsg>
         {rememberId && (
           <CheckBox
             title={propData.title}

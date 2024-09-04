@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "firebaseConfig";
-import { useState } from "react";
+import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore"; // Firestore를 사용하는 경우
 import { db } from "firebaseConfig"; // Firestore의 인스턴스 가져오기
 import CommonBtn from "components/common/CommonBtn";
@@ -44,8 +44,8 @@ const signupSchema = yup.object().shape({
   //   ),
   userMail: yup
     .string()
-    .email("유효한 이메일 형식이 아닙니다.")
-    .required("이메일을 입력해주세요."),
+    .required("이메일을 입력해주세요.")
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "유효한 이메일 형식이 아닙니다."),
   userPass: yup
     .string()
     .required("비밀번호를 입력해주세요.")
@@ -56,7 +56,7 @@ const signupSchema = yup.object().shape({
   userName: yup
     .string()
     .required("이름을 입력해주세요.")
-    .matches(/^[가-힣a-zA-Z\s]+$/, "이름은 한글 또는 영문만 입력해 주세요."),
+    .matches(/^[가-힣a-zA-Z\s]+$/, "유효한 이름이 아닙니다."),
   userPhone: yup
     .string()
     .required("휴대폰 번호를 입력해주세요.")
@@ -64,12 +64,11 @@ const signupSchema = yup.object().shape({
 });
 
 const Signup = () => {
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [fbErrorMsg, setFbErrorMsg] = useState<string | null>("");
 
   const propData = {
     title: "약관 동의",
     msg: "필수 약관에 모두 동의하셨습니다.",
-    errorMsg: errorMsg,
   };
 
   const {
@@ -88,8 +87,8 @@ const Signup = () => {
     userName: string;
     userPhone: string;
   }) => {
-    console.log("gd");
     console.log(data);
+    console.log("gd");
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
@@ -97,20 +96,40 @@ const Signup = () => {
         data.userPass,
       );
       await setDoc(doc(db, "users", response.user.uid), {
+        userMail: data.userMail,
         userName: data.userName,
         userPhone: data.userPhone,
-        userMail: data.userMail,
       });
       console.log(response);
     } catch (error) {
       // Firebase 인증 에러를 `setErrorMsg`를 통해 상태에 설정
       if (error instanceof Error) {
-        setErrorMsg(error.message);
+        alert(error.message);
+        setFbErrorMsg("");
       } else {
-        setErrorMsg("알 수 없는 오류가 발생했습니다.");
+        alert("알 수 없는 오류가 발생했습니다.");
       }
     }
   };
+
+  const tempArr = [
+    {
+      title: "userMail",
+      msg: "이메일을 입력해 주세요",
+    },
+    {
+      title: "userPass",
+      msg: "비밀번호는 영어,숫자 조합 8~12글자 입니다",
+    },
+    {
+      title: "userName",
+      msg: "이름을 입력해 주세요",
+    },
+    {
+      title: "userPhone",
+      msg: "전화번호를 입력해 주세요",
+    },
+  ];
 
   return (
     <SigninWrapStyle>
@@ -118,34 +137,26 @@ const Signup = () => {
       <SignupFormStyle onSubmit={handleSubmit(handleOnSubmit)}>
         <AuthContainer propData={propData}>
           {/* <SignupTitleStyle>이메일</SignupTitleStyle> */}
-          <AuthInput
-            error={errors.userMail?.message}
-            register={register("userMail")}
-          >
-            이메일을 입력해 주세요
-          </AuthInput>
-          <Divider />
-          <AuthInput
-            register={register("userPass")}
-            error={errors.userPass?.message}
-          >
-            비밀번호를 입력해 주세요
-          </AuthInput>
-          <Divider />
-          <AuthInput
-            register={register("userName")}
-            error={errors.userName?.message}
-          >
-            이름을 입력해 주세요
-          </AuthInput>
-          <Divider />
-          <AuthInput
-            register={register("userPhone")}
-            error={errors.userPhone?.message}
-          >
-            전화번호를 입력해 주세요
-          </AuthInput>
+          {tempArr.map((item, index) => (
+            <React.Fragment key={item.title}>
+              <AuthInput
+                key={item.title}
+                register={register}
+                title={item.title}
+              >
+                {item.msg}
+              </AuthInput>
+              {index < tempArr.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
         </AuthContainer>
+        <div>{fbErrorMsg}</div>
+        {tempArr.map(item => (
+          <AuthErrMsg
+            errorMsg={(errors as any)[item.title]?.message}
+            key={item.title}
+          ></AuthErrMsg>
+        ))}
         <CommonBtn>회원가입</CommonBtn>
       </SignupFormStyle>
     </SigninWrapStyle>

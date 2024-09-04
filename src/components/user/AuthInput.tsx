@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 import AuthErrMsg from "./AuthErrMsg";
+import { PhoneNumber } from "util/helper";
 
 const AuthInputStyle = styled.input`
   width: 100%;
@@ -22,27 +23,40 @@ const AuthInputWrap = styled.div`
 interface AuthData {
   children: string;
   register: any;
-  error?: string;
+  title: string;
 }
 
-const AuthInput = ({ children, register, error }: AuthData): JSX.Element => {
+const AuthInput = ({ children, register, title }: AuthData): JSX.Element => {
   const [inputValue, setInputValue] = useState<string>("");
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
   const clearInput = () => {
     setInputValue("");
   };
 
+  // console.log(title);
+  // console.log(register(title));
+
   const { placeholder, handleFocus, handleBlur } = usePlaceholder(children);
+
+  // console.log(title);
 
   return (
     <AuthInputWrap>
       <AuthInputStyle
-        {...register}
+        {...register(title)}
         value={inputValue}
-        onChange={e => setInputValue(e.target.value)}
         placeholder={placeholder}
         onFocus={() => handleFocus()}
         onBlur={() => handleBlur()}
+        // onChange={e => {
+        //   const formattedValue =
+        //     title === "userPhone" ? PhoneNumber(e) : e.target.value;
+        //   setInputValue(formattedValue);
+        //   register(title).onChange({ target: { value: formattedValue } });
+        // }}
+        onChange={e => {
+          setInputValue(e.target.value), register(title).onChange(e);
+        }}
         type={
           children.includes("비밀번호")
             ? visiblePass
@@ -50,7 +64,11 @@ const AuthInput = ({ children, register, error }: AuthData): JSX.Element => {
               : "password"
             : "text"
         }
-      ></AuthInputStyle>
+        maxLength={
+          (children.includes("비밀번호") && 12,
+          children.includes("전화번호") && 13)
+        }
+      />
       <div style={{ gap: "10px", display: "flex" }}>
         {children.includes("비밀번호") &&
           inputValue &&

@@ -44,7 +44,6 @@ const signinSchema = yup.object().shape({
 });
 
 const Signin = (): JSX.Element => {
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const {
     handleSubmit,
     register,
@@ -58,27 +57,33 @@ const Signin = (): JSX.Element => {
   const propData = {
     title: "로그인 유지",
     msg: "개인정보 보호를 위해 개인 PC에서만 사용하세요.",
-    errorMsg: errorMsg,
   };
+
+  const tempArr = [
+    {
+      title: "userMail",
+      msg: "이메일을 입력해 주세요",
+    },
+    {
+      title: "userPass",
+      msg: "비밀번호를 입력해 주세요",
+    },
+  ];
 
   return (
     <SigninWrapStyle>
       <LogoBlack />
       <AuthContainer propData={propData}>
-        <AuthInput
-          register={register("userMail")}
-          error={errors.userMail?.message}
-        >
-          아이디를 입력해 주세요
-        </AuthInput>
-        <Divider />
-        <AuthInput
-          register={register("userPass")}
-          error={errors.userPass?.message}
-        >
-          비밀번호를 입력해 주세요
-        </AuthInput>
+        {tempArr.map((item, index) => (
+          <>
+            <AuthInput key={item.title} register={register} title={item.title}>
+              {item.msg}
+            </AuthInput>
+            {index < tempArr.length - 1 && <Divider />}
+          </>
+        ))}
       </AuthContainer>
+      <CommonBtn>로그인</CommonBtn>
       <FindUserInfo></FindUserInfo>
       <SocialSignin></SocialSignin>
     </SigninWrapStyle>
