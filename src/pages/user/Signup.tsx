@@ -9,7 +9,7 @@ import * as yup from "yup";
 import React, { useState } from "react";
 import CommonBtn from "components/common/CommonBtn";
 import AuthErrMsg from "components/user/AuthErrMsg";
-import { localSignup } from "api/userSign";
+import { localSignup } from "api/user/userSign";
 import { userSign } from "interface/userSignInterface";
 import { useNavigate } from "react-router";
 

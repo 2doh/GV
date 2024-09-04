@@ -15,7 +15,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { userSign } from "interface/userSignInterface";
 import { useNavigate } from "react-router";
-import { localSignin } from "api/userSign";
+import { localSignin } from "api/user/userSign";
 
 const SigninWrapStyle = styled.div`
   margin: 200px auto 0;
