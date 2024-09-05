@@ -2,12 +2,13 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"; // Firestore를 사용하는 경우
 import { auth, db } from "firebaseConfig";
 import { userSign, userStateInterface } from "interface/userSignInterface";
 import userState from "store/userState";
-import { getCookie, setCookie } from "util/cookie";
+import { getCookie, removeCookie, setCookie } from "util/cookie";
 
 export const localSignup = async (data: userSign) => {
   try {
@@ -48,8 +49,6 @@ export const localSignin = async (data: userSign) => {
       // console.log(accessToken);
       userState.getState().setAccessToken(accessToken);
       setCookie("accesstoken", accessToken);
-      setCookie("userid", response.user.uid);
-
       const db = getFirestore();
       const userDocRef = doc(db, "users", response.user.uid);
       const userDoc = await getDoc(userDocRef);
@@ -59,6 +58,7 @@ export const localSignin = async (data: userSign) => {
         userState.getState().setUserMail(userData.userMail);
         userState.getState().setUserName(userData.userName);
         setCookie("userName", userData.userName);
+        setCookie("userMail", userData.userMail);
         // console.log("유저 정보:", userData);
         // console.log(userData.userName);
       } else {
@@ -78,5 +78,20 @@ export const localSignin = async (data: userSign) => {
     if (error instanceof Error) {
       console.log(error.message);
     }
+  }
+};
+
+export const localSignout = async () => {
+  try {
+    await signOut(auth);
+    userState.getState().setUserMail("");
+    userState.getState().setUserName("");
+    userState.getState().setAccessToken("");
+    removeCookie("userName");
+    removeCookie("userid");
+    removeCookie("accesstoken");
+  } catch (error) {
+    console.error("로그아웃 오류:", error);
+    alert("로그아웃 중 오류가 발생했습니다.");
   }
 };

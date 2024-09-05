@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { localSignout } from "api/user/userSign";
 import React from "react";
 import { useNavigate } from "react-router";
 import userState from "store/userState";
@@ -32,6 +33,9 @@ const HomeBtnStyle = styled.div`
 
 const HomeBtn = ({ children }: HomeProps): JSX.Element => {
   const navi = useNavigate();
+
+  const { accessToken } = userState();
+
   const handleBtClick = (children: string) => {
     if (children === "참여하기") {
       alert("dd");
@@ -41,6 +45,11 @@ const HomeBtn = ({ children }: HomeProps): JSX.Element => {
     }
     if (children === "로그인") {
       navi("/signin");
+    }
+    if (children === "로그아웃") {
+      localSignout();
+      alert("로그아웃 되었습니다.");
+      window.location.replace("/");
     }
   };
 
