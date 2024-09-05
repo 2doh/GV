@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",

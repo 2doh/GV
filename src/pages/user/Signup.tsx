@@ -12,6 +12,7 @@ import AuthErrMsg from "components/user/AuthErrMsg";
 import { localSignup } from "api/user/userSign";
 import { userSign } from "interface/userSignInterface";
 import { useNavigate } from "react-router";
+import Modal from "components/common/Modal";
 
 const SigninWrapStyle = styled.div`
   margin: 200px auto 0;
@@ -82,9 +83,9 @@ const Signup = () => {
 
   const handleOnSubmit = async (data: userSign) => {
     const result = await localSignup(data);
-    alert("회원가입 되었습니다.");
     console.log(result);
     if (result?.operationType === "signIn") {
+      alert("회원가입 되었습니다. 이메일 인증 후 로그인 할 수 있습니다.");
       navi("/signin");
     }
   };

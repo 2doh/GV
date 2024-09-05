@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { useNavigate } from "react-router";
+import userState from "store/userState";
 
 interface HomeProps {
   children: string;

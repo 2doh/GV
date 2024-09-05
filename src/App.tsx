@@ -1,15 +1,14 @@
 import Header from "components/layout/Header";
 import Board from "pages/board/Board";
 import Home from "pages/home/Home";
+import FindId from "pages/user/FindId";
+import FindPass from "pages/user/FindPass";
 import Signin from "pages/user/Signin";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import Signup from "pages/user/Signup";
+import { useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./css/common.css";
 import "./css/reset.css";
-import { useEffect, useState } from "react";
-import Test from "Test";
-import FindId from "pages/user/FindId";
-import Signup from "pages/user/Signup";
-import FindPass from "pages/user/FindPass";
 
 function App() {
   const location = useLocation();
@@ -17,7 +16,7 @@ function App() {
 
   useEffect(() => {
     // 로그인, 회원가입 경로에서는 헤더를 숨기고, 나머지 경로에서는 헤더를 표시
-    const hiddenPaths = ["/signin", "/signup", "/findid"];
+    const hiddenPaths = ["/signin", "/signup", "/findid", "/findpass"];
     setShowHeader(!hiddenPaths.includes(location.pathname));
   }, [location.pathname]); // 경로가 바뀔 때마다 실행
 

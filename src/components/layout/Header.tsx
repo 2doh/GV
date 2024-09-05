@@ -3,6 +3,7 @@ import Logo from "components/common/Logo";
 import HomeBtn from "components/home/HomeBtn";
 import { useEffect, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import userState from "store/userState";
 
 const HeaderStyle = styled.div`
   padding: 10px;
@@ -46,6 +47,7 @@ const HbrMenuStyle = styled.div`
 
 const Header = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(true);
+  const isUser = userState.getState().accessToken;
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 540) {
@@ -61,7 +63,7 @@ const Header = (): JSX.Element => {
     <HeaderStyle>
       <Logo />
       <HeaderMenuWrap>
-        {isVisible ? <HomeBtn>로그인</HomeBtn> : null}
+        {isVisible ? <HomeBtn>{isUser ? "로그아웃" : "로그인"}</HomeBtn> : null}
         <HbrMenuStyle>
           <RxHamburgerMenu style={{ height: "100%", width: "100%" }} />
         </HbrMenuStyle>

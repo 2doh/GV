@@ -28,4 +28,27 @@
     @include social();
     background-color: black;
   }
+  .login-panel-social-git {
+    @include social();
+    background-color: #fff;
+    border: 1px solid #000;
+    .giticon {
+      background-size: contain;
+      background: no-repeat center;
+      // background-color: #fff;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .login-panel-social-facebook {
+    @include social();
+    background-color: #3d5a98;
+    .facebookicon {
+      background-size: contain;
+      background: no-repeat center;
+      // background-color: #fff;
+      width: 30px;
+      height: 30px;
+    }
+  }
 }

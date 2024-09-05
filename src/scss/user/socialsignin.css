@@ -47,4 +47,39 @@
   justify-content: center;
   cursor: pointer;
   background-color: black;
+}
+.login-wrap-panel .login-panel-social-git {
+  width: 80px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+.login-wrap-panel .login-panel-social-git .giticon {
+  background-size: contain;
+  background: no-repeat center;
+  width: 30px;
+  height: 30px;
+}
+.login-wrap-panel .login-panel-social-facebook {
+  width: 80px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: #3d5a98;
+}
+.login-wrap-panel .login-panel-social-facebook .facebookicon {
+  background-size: contain;
+  background: no-repeat center;
+  width: 30px;
+  height: 30px;
 }/*# sourceMappingURL=socialsignin.css.map */

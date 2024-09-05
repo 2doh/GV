@@ -1,11 +1,13 @@
 import {
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "firebaseConfig";
-import { doc, setDoc } from "firebase/firestore"; // Firestore를 사용하는 경우
-import { db } from "firebaseConfig"; // Firestore의 인스턴스 가져오기
-import { userSign } from "interface/userSignInterface";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore"; // Firestore를 사용하는 경우
+import { auth, db } from "firebaseConfig";
+import { userSign, userStateInterface } from "interface/userSignInterface";
+import userState from "store/userState";
+import { getCookie, setCookie } from "util/cookie";
 
 export const localSignup = async (data: userSign) => {
   try {
@@ -14,6 +16,8 @@ export const localSignup = async (data: userSign) => {
       data.userMail,
       data.userPass,
     );
+    const user = response.user;
+    await sendEmailVerification(user);
     await setDoc(doc(db, "users", response.user.uid), {
       userMail: data.userMail,
       userName: data.userName,
@@ -22,12 +26,9 @@ export const localSignup = async (data: userSign) => {
     console.log(response);
     return response;
   } catch (error) {
-    // Firebase 인증 에러를 `setErrorMsg`를 통해 상태에 설정
     if (error instanceof Error) {
-      alert(error.message);
-      //   setFbErrorMsg("");
-    } else {
       alert("알 수 없는 오류가 발생했습니다.");
+      console.log(error.message);
     }
   }
 };
@@ -39,14 +40,43 @@ export const localSignin = async (data: userSign) => {
       data.userMail,
       data.userPass,
     );
-    console.log(response);
-    return response;
-  } catch (error) {
-    if (error instanceof Error) {
-      alert(error.message);
-      //   setFbErrorMsg("");
+    const user = response.user;
+    if (user.emailVerified) {
+      // 이메일 인증이 완료된 경우 로그인 성공
+      // console.log("로그인 성공");
+      const accessToken = await response.user.getIdToken();
+      // console.log(accessToken);
+      userState.getState().setAccessToken(accessToken);
+      setCookie("accesstoken", accessToken);
+      setCookie("userid", response.user.uid);
+
+      const db = getFirestore();
+      const userDocRef = doc(db, "users", response.user.uid);
+      const userDoc = await getDoc(userDocRef);
+      if (userDoc.exists()) {
+        // 유저 문서가 존재하는 경우, 유저 정보를 처리
+        const userData = userDoc.data() as userStateInterface;
+        userState.getState().setUserMail(userData.userMail);
+        userState.getState().setUserName(userData.userName);
+        setCookie("userName", userData.userName);
+        // console.log("유저 정보:", userData);
+        // console.log(userData.userName);
+      } else {
+        console.log("유저 정보가 존재하지 않습니다.");
+        return;
+      }
+      // console.log(userState);
+      return response;
     } else {
-      alert("알 수 없는 오류가 발생했습니다.");
+      // 이메일 인증이 완료되지 않은 경우 로그아웃
+      await auth.signOut();
+      alert("이메일 인증이 필요합니다. 메일을 확인해주세요.");
+      return null;
+    }
+  } catch (error) {
+    alert("알 수 없는 오류가 발생했습니다.");
+    if (error instanceof Error) {
+      console.log(error.message);
     }
   }
 };

@@ -82,9 +82,9 @@ const Signin = (): JSX.Element => {
 
   const handleOnSubmit = async (data: userSign) => {
     const result = await localSignin(data);
-    alert("로그인 되었습니다.");
     console.log(result);
     if (result?.operationType === "signIn") {
+      alert("로그인 되었습니다.");
       navi("/");
     }
   };
