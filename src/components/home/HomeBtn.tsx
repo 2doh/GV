@@ -38,7 +38,7 @@ const HomeBtn = ({ children }: HomeProps): JSX.Element => {
 
   const handleBtClick = (children: string) => {
     if (children === "참여하기") {
-      alert("dd");
+      accessToken ? navi("/board") : alert("로그인이 필요한 서비스입니다.");
     }
     if (children === "요금제 및 가격") {
       alert("준비중입니다");
