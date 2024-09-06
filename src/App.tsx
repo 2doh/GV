@@ -9,14 +9,22 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./css/common.css";
 import "./css/reset.css";
+import userState from "store/userState";
+import NotFound from "pages/NotFound";
 
 function App() {
   const location = useLocation();
   const [showHeader, setShowHeader] = useState(true);
+  const { accessToken } = userState();
 
   useEffect(() => {
-    // 로그인, 회원가입 경로에서는 헤더를 숨기고, 나머지 경로에서는 헤더를 표시
-    const hiddenPaths = ["/signin", "/signup", "/findid", "/findpass"];
+    const hiddenPaths = [
+      "/board",
+      "/signin",
+      "/signup",
+      "/findid",
+      "/findpass",
+    ];
     setShowHeader(!hiddenPaths.includes(location.pathname));
   }, [location.pathname]); // 경로가 바뀔 때마다 실행
 
@@ -24,12 +32,18 @@ function App() {
     <>
       {showHeader && <Header />}
       <Routes>
+        {accessToken ? (
+          <Route path="/board" element={<Board />}></Route>
+        ) : (
+          <>
+            <Route path="/signin" element={<Signin />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/findid" element={<FindId />}></Route>
+            <Route path="/findpass" element={<FindPass />}></Route>
+          </>
+        )}
         <Route path="/" element={<Home />}></Route>
-        <Route path="/signin" element={<Signin />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/findid" element={<FindId />}></Route>
-        <Route path="/findpass" element={<FindPass />}></Route>
-        <Route path="/board" element={<Board />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </>
   );

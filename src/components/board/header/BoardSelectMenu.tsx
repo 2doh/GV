@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { ReactElement } from "react";
+import { Dispatch, ReactElement, SetStateAction } from "react";
+import boardState from "store/boardState";
 
 const IconWrapStyle = styled.div`
   width: 40px;
-  height: 40px;
+  /* height: 40px; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +13,7 @@ const IconWrapStyle = styled.div`
 
 type menuItem = {
   item?: ReactElement;
-  state?: string;
+  state: string;
 };
 
 type BoardSelectMenuProps = {
@@ -20,8 +21,12 @@ type BoardSelectMenuProps = {
 };
 
 const BoardSelectMenu = ({ menuList }: BoardSelectMenuProps): JSX.Element => {
-  const tempHandle = (index: number) => {
-    console.log(index);
+  const tempHandle = (item: menuItem) => {
+    // console.log(index);
+    // console.log(item.state);
+
+    // zustand store에 담는 코드
+    boardState.getState().setCursorState(item.state);
   };
 
   return (
@@ -30,7 +35,7 @@ const BoardSelectMenu = ({ menuList }: BoardSelectMenuProps): JSX.Element => {
         <IconWrapStyle
           key={index}
           onClick={() => {
-            tempHandle(index);
+            tempHandle(item);
           }}
         >
           {item.item}

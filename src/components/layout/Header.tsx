@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import HbrMenu from "components/common/HbrMenu";
 import Logo from "components/common/Logo";
 import HomeBtn from "components/home/HomeBtn";
 import { useEffect, useState } from "react";
@@ -35,16 +36,6 @@ const HeaderMenuWrap = styled.div`
   }
 `;
 
-const HbrMenuStyle = styled.div`
-  width: 80px;
-  height: 80px;
-  cursor: pointer;
-  @media (max-width: 540px) {
-    width: 90px;
-    height: 40px;
-  }
-`;
-
 const Header = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(true);
   const isUser = userState.getState().accessToken;
@@ -64,9 +55,7 @@ const Header = (): JSX.Element => {
       <Logo />
       <HeaderMenuWrap>
         {isVisible ? <HomeBtn>{isUser ? "로그아웃" : "로그인"}</HomeBtn> : null}
-        <HbrMenuStyle>
-          <RxHamburgerMenu style={{ height: "100%", width: "100%" }} />
-        </HbrMenuStyle>
+        <HbrMenu />
       </HeaderMenuWrap>
     </HeaderStyle>
   );

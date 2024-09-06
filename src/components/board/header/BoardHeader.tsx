@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
-import BoardSelectMenu from "components/board/BoardSelectMenu";
-import React, { ReactElement } from "react";
+
+import LogoBlack from "components/common/LogoBlack";
+import { ReactElement } from "react";
 import {
   FaEraser,
   FaFillDrip,
@@ -11,15 +12,22 @@ import {
   FaRegSquare,
   FaUndoAlt,
 } from "react-icons/fa";
+import { RxCursorArrow } from "react-icons/rx";
+import BoardSelectMenu from "./BoardSelectMenu";
 
 const BoardHeaderWrap = styled.div`
   width: 100%;
   height: 100%;
   min-height: 70px;
-  background-color: red;
+  max-height: 90px;
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
+  /* position: relative; */
+  position: absolute;
+  padding-left: 10px;
 `;
 
 const BoardHeaderInnerStyle = styled.div`
@@ -32,10 +40,14 @@ const BoardHeaderInnerStyle = styled.div`
 
 interface menuItem {
   item?: ReactElement;
-  state?: string;
+  state: string;
 }
 
-const menuList: menuItem[] = [
+export const menuList: menuItem[] = [
+  {
+    item: <RxCursorArrow />,
+    state: "cursor",
+  },
   {
     item: <FaPen />,
     state: "pen",
@@ -52,10 +64,10 @@ const menuList: menuItem[] = [
 const BoardHeader = (): JSX.Element => {
   return (
     <BoardHeaderWrap>
+      <LogoBlack />
       <BoardHeaderInnerStyle>
         <BoardSelectMenu menuList={menuList} />
       </BoardHeaderInnerStyle>
-      <BoardHeaderInnerStyle>{/* <BoardSelectMenu /> */}</BoardHeaderInnerStyle>
     </BoardHeaderWrap>
   );
 };

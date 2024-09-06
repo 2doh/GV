@@ -1,11 +1,11 @@
-import React from "react";
 import styled from "@emotion/styled";
-import BoardHeader from "pages/board/BoardHeader";
-import BoardField from "./BoardField";
+import BoardField from "components/board/BoardField";
+import BoardHeader from "components/board/header/BoardHeader";
 
 const BoardWrap = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  background-color: aliceblue;
 `;
 
 const Board = (): JSX.Element => {
