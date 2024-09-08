@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import React, { useEffect, useRef, useState } from "react";
 import boardState from "store/boardState";
+import Palette from "./Palette";
 
 const FieldStyle = styled.canvas`
-  width: 100%;
-  height: 100%;
+  /* height: 100vh;
+  width: 100vw; */
+  background-color: wheat;
 `;
 
 const BoardField = (): JSX.Element => {
@@ -12,24 +14,32 @@ const BoardField = (): JSX.Element => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [startPos, setStartPos] = useState<{ x: number; y: number } | null>(
-    null,
-  );
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    console.log(cursorState);
+    // console.log(ctx);
     if (cursorState) {
       // 작업 시작
       setIsDrawing(true);
-      // canvas의 위치 탐지
-      setStartPos({ x: e.nativeEvent.offsetX, y: e.nativeEvent.offsetY });
+    }
+    if (cursorState === "pen") {
+      ctx?.beginPath();
+      ctx?.moveTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
     }
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (!isDrawing) {
+      return;
+    }
     if (cursorState === "pen") {
-      // moveTo(startPos?.x, startPos?.y);
+      ctx?.lineTo(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
       ctx?.stroke();
     }
+    if (cursorState === "palette") {
+      return <Palette></Palette>;
+    }
+    // console.log(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
   };
 
   const handleMouseUp = () => {
@@ -41,24 +51,30 @@ const BoardField = (): JSX.Element => {
 
   useEffect(() => {
     if (canvasRef.current) {
+      const canvas = canvasRef.current;
+      // 실제 캔버스 크기를 설정
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
       // canvasRef.current가 null이 아닌 경우에만 getContext 호출
       setCtx(canvasRef.current.getContext("2d"));
     }
   }, []);
 
   return (
-    <FieldStyle
-      ref={canvasRef}
-      onMouseDown={e => {
-        handleMouseDown(e);
-      }}
-      onMouseMove={e => {
-        handleMouseMove(e);
-      }}
-      onMouseUp={() => {
-        handleMouseUp();
-      }}
-    ></FieldStyle>
+    <>
+      <FieldStyle
+        ref={canvasRef}
+        onMouseDown={e => {
+          handleMouseDown(e);
+        }}
+        onMouseMove={e => {
+          handleMouseMove(e);
+        }}
+        onMouseUp={() => {
+          handleMouseUp();
+        }}
+      />
+    </>
   );
 };
 

@@ -17,7 +17,8 @@ const FindUserInfo = () => {
       <div
         className="find-user-info-navi"
         onClick={() => {
-          navi("/findid");
+          // navi("/findid");
+          alert("미구현");
         }}
       >
         아이디 찾기
@@ -25,7 +26,8 @@ const FindUserInfo = () => {
       <div
         className="find-user-info-navi"
         onClick={() => {
-          navi("/findpass");
+          // navi("/findpass");
+          alert("미구현");
         }}
       >
         비밀번호 찾기

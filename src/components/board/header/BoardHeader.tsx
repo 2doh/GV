@@ -14,6 +14,7 @@ import {
 } from "react-icons/fa";
 import { RxCursorArrow } from "react-icons/rx";
 import BoardSelectMenu from "./BoardSelectMenu";
+import Palette from "../Palette";
 
 const BoardHeaderWrap = styled.div`
   width: 100%;
@@ -52,9 +53,10 @@ export const menuList: menuItem[] = [
     item: <FaPen />,
     state: "pen",
   },
-  { item: <FaPalette />, state: "palette" },
+  { item: <Palette />, state: "palette" },
+  // { item: <FaPalette />, state: "palette" },
   { item: <FaFillDrip />, state: "fill" },
-  { item: <FaRegSquare />, state: "square" },
+  { item: <FaRegSquare />, state: "quadrangle" },
   { item: <FaRegCircle />, state: "circle" },
   { item: <FaEraser />, state: "eraser" },
   { item: <FaUndoAlt />, state: "undo" },

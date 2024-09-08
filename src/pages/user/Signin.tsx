@@ -1,21 +1,17 @@
 import styled from "@emotion/styled";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { localSignin } from "api/user/userSign";
 import CommonBtn from "components/common/CommonBtn";
-import Logo from "components/common/Logo";
 import LogoBlack from "components/common/LogoBlack";
-import HomeBtn from "components/home/HomeBtn";
 import Divider from "components/layout/Divider";
 import AuthContainer from "components/user/AuthContainer";
 import AuthInput from "components/user/AuthInput";
 import FindUserInfo from "components/user/FindUserInfo";
 import SocialSignin from "components/user/SocialSignin";
-import { auth } from "firebaseConfig";
-import { useState } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SubmitHandler, useForm } from "react-hook-form";
-import * as yup from "yup";
 import { userSign } from "interface/userSignInterface";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { localSignin } from "api/user/userSign";
+import * as yup from "yup";
 
 const SigninWrapStyle = styled.div`
   margin: 200px auto 0;
@@ -82,11 +78,18 @@ const Signin = (): JSX.Element => {
 
   const handleOnSubmit = async (data: userSign) => {
     const result = await localSignin(data);
-    // console.log(result);
+    console.log(result);
     if (result?.operationType === "signIn") {
+      // console.log("로그인");
       alert("로그인 되었습니다.");
-      navi("/");
+      // console.log("로그인완료");
+      // console.log("화면이동");
     }
+    if (!result) {
+      alert("로그인 오류 발생");
+      return;
+    }
+    navi("/");
   };
 
   return (

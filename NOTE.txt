@@ -1,26 +1,5 @@
-CheckBox 컴포넌트 사용시 필요 props : title / msg
+로그인 후 화면 넘어갈 때 header 먼저 출력
 
-CommontBtn 반드시 children 위치에 버튼이름 적어주어야 함
-ex) <CommontBtn>로그인</CommontBtn>
+로그인 유효성 검사
 
-AuthContainer propData = {title : , msg : } => CheckBox 컴포넌트에 사용됨
-
-
-
-커스텀 훅 정리
-usePlaceholder : input 태그 focus시 placeholder 제거
-
-<AuthInput>비밀번호를 입력해 주세요</AuthInput>
-
-AuthInput.tsx
-```
-interface AuthData {
-  children: string;
-}
-
-const { placeholder, handleFocus, handleBlur } = usePlaceholder(children);
-
-placeholder={placeholder}
-onFocus={() => handleFocus()}
-onBlur={() => handleBlur()}
-```
+소셜 로그인

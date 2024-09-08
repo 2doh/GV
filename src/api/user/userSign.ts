@@ -90,6 +90,7 @@ export const localSignout = async () => {
     removeCookie("userName");
     removeCookie("userid");
     removeCookie("accesstoken");
+    removeCookie("userMail");
   } catch (error) {
     console.error("로그아웃 오류:", error);
     alert("로그아웃 중 오류가 발생했습니다.");

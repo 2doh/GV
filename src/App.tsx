@@ -11,6 +11,7 @@ import "./css/common.css";
 import "./css/reset.css";
 import userState from "store/userState";
 import NotFound from "pages/NotFound";
+import Loading from "components/common/Loading";
 
 function App() {
   const location = useLocation();
@@ -18,14 +19,16 @@ function App() {
   const { accessToken } = userState();
 
   useEffect(() => {
-    const hiddenPaths = [
-      "/board",
-      "/signin",
-      "/signup",
-      "/findid",
-      "/findpass",
-    ];
-    setShowHeader(!hiddenPaths.includes(location.pathname));
+    // const hiddenPaths = [
+    //   "/board",
+    //   "/signin",
+    //   "/signup",
+    //   "/findid",
+    //   "/findpass",
+    // ];
+    const hiddenPaths = ["/"];
+    setShowHeader(hiddenPaths.includes(location.pathname));
+    // setShowHeader(!hiddenPaths.includes(location.pathname));
   }, [location.pathname]); // 경로가 바뀔 때마다 실행
 
   return (
