@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import React from "react";
-import { FaPalette } from "react-icons/fa";
+import { useState } from "react";
+import boardColorState from "store/boardColorState";
 
 const PaletteStyle = styled.input`
   -webkit-appearance: none;
@@ -12,20 +12,16 @@ const PaletteStyle = styled.input`
   width: 16px;
   height: 16px;
   cursor: pointer;
-
   &:focus {
     outline: none;
   }
-
   &::-webkit-color-swatch {
     border: none;
     border-radius: 100%;
   }
-
   &::-webkit-color-swatch-wrapper {
     padding: 0;
   }
-
   &::-moz-color-swatch {
     border: none;
     border-radius: 100%;
@@ -34,9 +30,13 @@ const PaletteStyle = styled.input`
 
 const Palette = () => {
   return (
-    <>
-      <PaletteStyle type="color" />
-    </>
+    <PaletteStyle
+      type="color"
+      onChange={e => {
+        const hexColor = e.target.value;
+        boardColorState.getState().setColorState(hexColor);
+      }}
+    />
   );
 };
 
