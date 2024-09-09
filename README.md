@@ -1,5 +1,5 @@
 <div align="center" width="500">
-  <img src="./src/components/common/LogoBlack.tsx" width="500" height="200" alt="로고 준비 중">
+  <img src="./src/images/logo.svg" width="500" height="200" alt="로고 준비 중">
   <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;">GatherVerse</h2>
 
 </br>
