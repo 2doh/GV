@@ -81,15 +81,15 @@ const Signin = (): JSX.Element => {
     console.log(result);
     if (result?.operationType === "signIn") {
       // console.log("로그인");
-      alert("로그인 되었습니다.");
+      // alert("로그인 되었습니다.");
       // console.log("로그인완료");
       // console.log("화면이동");
+      navi("/");
     }
     if (!result) {
       alert("로그인 오류 발생");
       return;
     }
-    navi("/");
   };
 
   return (
