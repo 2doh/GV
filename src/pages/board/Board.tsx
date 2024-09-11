@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Test from "Test";
 import BoardField from "components/board/BoardField";
 import BoardHeader from "components/board/header/BoardHeader";
 import { DocumentData, doc, onSnapshot, setDoc } from "firebase/firestore";
@@ -39,10 +40,14 @@ const Board = (): JSX.Element => {
   return (
     <BoardWrap>
       <BoardHeader />
-      <BoardField
+      {/* <BoardField
         canvasState={canvasState}
         updateCanvasState={updateCanvasState}
-      />
+      /> */}
+      <Test
+        canvasState={canvasState}
+        updateCanvasState={updateCanvasState}
+      ></Test>
     </BoardWrap>
   );
 };
