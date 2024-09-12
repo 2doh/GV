@@ -2,9 +2,16 @@ import styled from "@emotion/styled";
 import Test from "Test";
 import BoardField from "components/board/BoardField";
 import BoardHeader from "components/board/header/BoardHeader";
-import { DocumentData, doc, onSnapshot, setDoc } from "firebase/firestore";
+import {
+  DocumentData,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "firebaseConfig";
 import { useEffect, useState } from "react";
+import boardState from "store/boardState";
 
 const BoardWrap = styled.div`
   width: 100%;
@@ -13,6 +20,7 @@ const BoardWrap = styled.div`
 `;
 
 const Board = (): JSX.Element => {
+  const { cursorState } = boardState();
   const [canvasState, setCanvasState] = useState<
     DocumentData | null | undefined
   >(null);
@@ -40,14 +48,9 @@ const Board = (): JSX.Element => {
   return (
     <BoardWrap>
       <BoardHeader />
-      {/* <BoardField
-        canvasState={canvasState}
-        updateCanvasState={updateCanvasState}
-      /> */}
-      <Test
-        canvasState={canvasState}
-        updateCanvasState={updateCanvasState}
-      ></Test>
+      <BoardField canvasState={canvasState} />
+      {/* <Test
+      ></Test> */}
     </BoardWrap>
   );
 };

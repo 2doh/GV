@@ -29,6 +29,7 @@ const BoardHeaderWrap = styled.div`
   /* position: relative; */
   position: absolute;
   padding-left: 10px;
+  z-index: 99999999999;
 `;
 
 const BoardHeaderInnerStyle = styled.div`

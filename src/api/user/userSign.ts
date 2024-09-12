@@ -18,6 +18,7 @@ export const localSignup = async (data: userSign) => {
       data.userPass,
     );
     const user = response.user;
+    console.log(user);
     await sendEmailVerification(user);
     await setDoc(doc(db, "users", response.user.uid), {
       userMail: data.userMail,
