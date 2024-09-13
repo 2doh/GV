@@ -2,6 +2,8 @@
   <img src="./src/images/logo.svg" width="500" height="200" alt="로고">
   <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;">GatherVerse</h2>
 
+```작업 중인 프로젝트 입니다```
+  
 </br>
 👨‍👩‍👦‍👦함께 한다면, 📈무한한 가능성을 만들어 냅니다
 
