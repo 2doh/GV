@@ -45,21 +45,21 @@ const Test = (): JSX.Element => {
     console.log(color);
   }, [colorState, cursorState]);
 
-  // console.log(startX, startY);
+  console.log(startX, startY);
 
-  // useEffect(() => {
-  //   if (cursorState === "quadrangle") {
-  //     const rect = new Rect({
-  //       top: startY,
-  //       left: startX,
-  //       width: 100,
-  //       height: 60,
-  //       fill: "black",
-  //       borderColor: "black",
-  //     });
-  //     canvas?.add(rect);
-  //   }
-  // }, [cursorState]);
+  useEffect(() => {
+    if (cursorState === "quadrangle" && startX && startY) {
+      const rect = new Rect({
+        top: startY,
+        left: startX,
+        width: 100,
+        height: 60,
+        fill: "black",
+        borderColor: "black",
+      });
+      canvas?.add(rect);
+    }
+  }, [cursorState]);
   return <canvas id="canvas" ref={canvasRef} className="field" />;
 };
 

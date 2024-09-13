@@ -12,6 +12,7 @@ import "./css/reset.css";
 import userState from "store/userState";
 import NotFound from "pages/NotFound";
 import Loading from "components/common/Loading";
+import Test from "Test";
 
 function App() {
   const location = useLocation();
@@ -36,7 +37,9 @@ function App() {
       {showHeader && <Header />}
       <Routes>
         {accessToken ? (
-          <Route path="/board" element={<Board />}></Route>
+          <>
+            <Route path="/board" element={<Board />}></Route>
+          </>
         ) : (
           <>
             <Route path="/signin" element={<Signin />}></Route>

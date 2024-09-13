@@ -6,12 +6,15 @@ import {
   setDoc,
   onSnapshot,
   query,
+  deleteDoc,
+  getDocs,
 } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
 import boardColorState from "store/boardColorState";
 import boardState from "store/boardState";
 import { floodFill } from "util/floodFill";
 import { db } from "firebaseConfig"; // Firebase config import
+import { Canvas, Rect } from "fabric";
 
 const FieldStyle = styled.canvas`
   background-color: wheat;
@@ -20,6 +23,7 @@ const FieldStyle = styled.canvas`
 const BoardField = ({ canvasState, updateCanvasState }: any): JSX.Element => {
   const { cursorState } = boardState();
   const { colorState } = boardColorState();
+  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -27,6 +31,7 @@ const BoardField = ({ canvasState, updateCanvasState }: any): JSX.Element => {
   const [drawingPath, setDrawingPath] = useState<{ x: number; y: number }[]>(
     [],
   );
+  const eraserSize = 20;
 
   const handleMouseDown = (e: React.MouseEvent) => {
     if (cursorState) {
@@ -41,19 +46,27 @@ const BoardField = ({ canvasState, updateCanvasState }: any): JSX.Element => {
       ctx.strokeStyle = color;
       ctx.moveTo(offsetX, offsetY);
     }
-
     setDrawingPath([{ x: offsetX, y: offsetY }]);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
+  const handleMouseMove = async (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (!isDrawing || ctx === null) {
       return;
     }
     const { offsetX, offsetY } = e.nativeEvent;
-    console.log(e.nativeEvent);
+    // console.log(e.nativeEvent);
     if (cursorState === "pen") {
       ctx.lineTo(offsetX, offsetY);
       ctx.stroke();
+      setDrawingPath(prevPath => [...prevPath, { x: offsetX, y: offsetY }]);
+    }
+    if (cursorState === "eraser") {
+      ctx.clearRect(
+        offsetX - eraserSize / 2,
+        offsetY - eraserSize / 2,
+        eraserSize,
+        eraserSize,
+      );
       setDrawingPath(prevPath => [...prevPath, { x: offsetX, y: offsetY }]);
     }
   };
@@ -62,14 +75,42 @@ const BoardField = ({ canvasState, updateCanvasState }: any): JSX.Element => {
     setIsDrawing(false);
     ctx?.beginPath();
 
-    // Firestore에 현재 경로 저장
-    const newDocRef = doc(collection(db, "canvas", "current", "paths"));
-    await setDoc(newDocRef, {
-      color: color,
-      path: drawingPath,
-    });
-
+    if (cursorState === "pen") {
+      // Firestore에 현재 경로 저장
+      const newDocRef = doc(collection(db, "canvas", "current", "paths"));
+      await setDoc(newDocRef, {
+        color: color,
+        path: drawingPath,
+      });
+    }
+    if (cursorState === "eraser") {
+      await deletePathFromDB(drawingPath);
+    }
     setDrawingPath([]); // Reset drawing path after saving
+  };
+
+  const deletePathFromDB = async (erasedArea: { x: number; y: number }[]) => {
+    const pathsQuery = query(collection(db, "canvas", "current", "paths"));
+    const snapshot = await getDocs(pathsQuery);
+
+    snapshot.forEach(docSnapshot => {
+      const pathData = docSnapshot.data();
+      const path = pathData.path; // Firestore에 저장된 경로
+
+      // 지운 영역과 경로가 겹치는지 확인
+      const isInErasedArea = path.some((point: { x: number; y: number }) => {
+        return erasedArea.some(
+          erasedPoint =>
+            Math.abs(point.x - erasedPoint.x) < 20 && // 지우개 크기에 따라 범위 조절
+            Math.abs(point.y - erasedPoint.y) < 20,
+        );
+      });
+
+      if (isInErasedArea) {
+        // 경로가 지워진 영역에 포함되면 Firestore에서 삭제
+        deleteDoc(doc(db, "canvas", "current", "paths", docSnapshot.id));
+      }
+    });
   };
 
   const resizeCanvas = () => {

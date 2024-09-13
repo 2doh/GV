@@ -49,8 +49,7 @@ const Board = (): JSX.Element => {
     <BoardWrap>
       <BoardHeader />
       <BoardField canvasState={canvasState} />
-      {/* <Test
-      ></Test> */}
+      {/* <Test></Test> */}
     </BoardWrap>
   );
 };
