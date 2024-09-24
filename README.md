@@ -1,10 +1,9 @@
-
 <div align="center" width="500">
   <img src="./src/images/logo.svg" width="500" height="200" alt="로고">
   <h2 style="border-bottom: 1px solid #d8dee4; color: #282d33;">GatherVerse</h2>
 
-```작업 중인 프로젝트 입니다```
-  
+`작업 중인 프로젝트 입니다`
+
 </br>
 👨‍👩‍👦‍👦함께 한다면, 📈무한한 가능성을 만들어 냅니다
 
@@ -26,7 +25,7 @@
 
 <h4>📅 개발기간</h4>
 
-- 2024-08-26 ~
+- 2024-08-26 ~ 2024-09-13 (로그인/회원가입/실시간화면공유/컴포넌트화)
 
 <h4>📌 기술 스택</h4>
 <div style="margin: 0 auto; text-align: center;" align="center">
