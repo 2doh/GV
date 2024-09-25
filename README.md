@@ -26,6 +26,7 @@
 <h4>📅 개발기간</h4>
 
 - 2024-08-26 ~ 2024-09-13 (로그인/회원가입/실시간화면공유/컴포넌트화)
+- 2024-09-25 ~
 
 <h4>📌 기술 스택</h4>
 <div style="margin: 0 auto; text-align: center;" align="center">
@@ -49,7 +50,8 @@
 
 <h4>📌 사전 기획</h4>
 </br>
-[린캔버스](https://github.com/user-attachments/files/16864992/default.pdf)
+
+린캔버스 https://github.com/user-attachments/files/16864992/default.pdf
 
 [노션](https://spotted-party-00f.notion.site/GatherVerse-2f21ffcbf5934c5a92d94ff90c2c35f2?pvs=4)
 
