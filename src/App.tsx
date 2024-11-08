@@ -36,18 +36,15 @@ function App() {
     <>
       {showHeader && <Header />}
       <Routes>
-        {accessToken ? (
+        {accessToken && (
           <>
             <Route path="/board" element={<Board />}></Route>
           </>
-        ) : (
-          <>
-            <Route path="/signin" element={<Signin />}></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/findid" element={<FindId />}></Route>
-            <Route path="/findpass" element={<FindPass />}></Route>
-          </>
         )}
+        <Route path="/signin" element={<Signin />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+        <Route path="/findid" element={<FindId />}></Route>
+        <Route path="/findpass" element={<FindPass />}></Route>
         <Route path="/" element={<Home />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

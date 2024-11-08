@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "@emotion/styled";
-import background from "../../images/startup-3267505_1920.jpg";
 import HomeBanner from "components/home/HomeBanner";
+import background from "../../images/startup-3267505_1920.jpg";
 
 const HomeStyle = styled.div`
   width: 100%;

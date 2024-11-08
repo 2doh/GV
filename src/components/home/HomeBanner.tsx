@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import React from "react";
 import HomeBtn from "./HomeBtn";
+import { HiMiniQuestionMarkCircle } from "react-icons/hi2";
 
 const BannerWrap = styled.div`
   width: 100%;
@@ -48,6 +49,14 @@ const SpanStyle = styled.span`
   }
 `;
 
+const QuestionStyle = styled.div`
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+`;
+
 const HomeBanner = (): JSX.Element => {
   return (
     <BannerWrap>
@@ -60,6 +69,9 @@ const HomeBanner = (): JSX.Element => {
           <HomeBtn>참여하기</HomeBtn>
           <HomeBtn>요금제 및 가격</HomeBtn>
         </BannerBtnWrap>
+        <QuestionStyle>
+          <HiMiniQuestionMarkCircle style={{ height: "100%", width: "100%" }} />
+        </QuestionStyle>
       </BannerInnerStyle>
     </BannerWrap>
   );
